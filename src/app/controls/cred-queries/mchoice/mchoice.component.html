@@ -1,0 +1,9 @@
+<div class="p-2">
+<button class="btn btn-info" (click)="addNewQueryBlock()">Create answer</button>
+</div>
+<div *ngFor="let item of model.ansvers; let i = index;">
+    <div class="input-group mb-3">
+<input type="text" class="form-control" placeholder="enter answer for query {{i}}"  [(ngModel)]="model.ansvers[i].value"> 
+<button class="btn btn-link" (click)="removeQueryBlock(model.ansvers[i].index)" title="remove item">X</button>
+</div>
+</div>

@@ -1,0 +1,31 @@
+<h4>Your saved questions</h4>
+
+<ng-template [ngIf]="queries.length==0">
+   <div class="alert alert-info">
+<p>You don't have any stored questions.</p>
+    <p>Do you want to <a  routerLink="/create-question" routerLinkActive="active">create one?</a></p>
+   </div>
+     </ng-template>
+
+<div *ngFor="let query of queries" class="card m-2">
+    <div class="card-header p-1">
+        <h5>{{query.data.text}}</h5>
+        <a routerLink="/edit-question/{{query.index}}" class="p-1">
+            Edit question
+        </a>
+        <button class="btn btn-link p-1" 
+        (click)="deleteQuestion($event,query)">
+            Delete question
+        </button>
+    </div>
+    <div class="card-body">
+        <h6>Answers</h6>
+        <ol>
+            <li *ngFor="let answerItem of query.data.ansvers">
+               <span><b>{{answerItem.value}}</b></span>
+            </li>
+        </ol>
+    </div>
+</div>
+
+

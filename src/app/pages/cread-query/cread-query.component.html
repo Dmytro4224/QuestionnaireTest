@@ -1,0 +1,40 @@
+<div *ngIf="(queryId=='-1'); then createQuestionBlock else editQuestionBlock"></div>
+<ng-template #createQuestionBlock>
+    <h1>Create new question</h1>    
+</ng-template>
+<ng-template #editQuestionBlock>
+    <h1>Edit question #{{queryId}}</h1>    
+    Content to render when condition is true.
+</ng-template>
+
+<div class="card">
+    <div class="card-body">
+<div class="mb-3">
+    <!--текст питання-->
+    <label for="queriesQueryText" class="form-label">Query text</label>
+    <input type="text" class="form-control" id="queriesQueryText" 
+    value="{{questionModel.text}}"
+    [(ngModel)]="questionModel.text"
+    />
+</div>
+
+<div class="mb-3">
+    <!--вибір варіантів відповіді-->
+    <label for="queriesTypeSelect" class="form-label">Answer type</label>
+<select class="form-control" [(ngModel)]="questionModel.type">
+    <option *ngFor="let item of queriesType"
+    [value]="item.id">
+        {{item.name}}
+    </option>
+  </select>
+ 
+  <ng-template [ngIf]="questionModel.type==1 || questionModel.type==2">
+    <app-mchoice [model]="questionModel"></app-mchoice>
+     </ng-template>
+</div>
+</div>
+<div class="card-footer">
+<button class="btn btn-success" (click)="saveQuery()">Save</button>
+<a class="btn-link btn" routerLink="/manage" routerLinkActive="active">Cancel</a>
+</div>
+</div>

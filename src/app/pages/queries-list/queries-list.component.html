@@ -1,0 +1,56 @@
+<h4>Your saved questions</h4>
+
+<ng-template [ngIf]="queries.length==0">
+   <div class="alert alert-info">
+<p>You don't have any stored questions.</p>
+    <p>Do you want to <a  routerLink="/create-question" routerLinkActive="active">create one?</a></p>
+   </div>
+     </ng-template>
+
+
+
+
+<div class="row">
+<div class="col-6">
+    <div *ngFor="let query of queries" class="card m-4">
+        <div class="card-header p-3">
+            <h5>{{query.data.text}}</h5>
+        </div>
+        <div class="card-body">
+            <h6>Answers</h6>
+            <container-element [ngSwitch]="query.data.type">
+                <div *ngSwitchCase="1">
+                    <div class="form-check" *ngFor="let answerItem of query.data.ansvers">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault-{{query.index}}" id="flexRadioDefault-{{query.index}}-{{answerItem.index}}">
+                        <label class="form-check-label" for="flexRadioDefault-{{query.index}}-{{answerItem.index}}">
+                            {{answerItem.value}}
+                        </label>
+                      </div>
+                </div>
+                <div *ngSwitchCase="2">
+                    <div class="form-check" *ngFor="let answerItem of query.data.ansvers">
+                        <input class="form-check-input" type="checkbox" name="flexRadioDefault-{{query.index}}" id="flexRadioDefault-{{query.index}}-{{answerItem.index}}">
+                        <label class="form-check-label" for="flexRadioDefault-{{query.index}}-{{answerItem.index}}">
+                            {{answerItem.value}}
+                        </label>
+                      </div>
+                </div>
+                <div *ngSwitchCase="3">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Your answer</label>
+                        <textarea class="form-control">
+                        </textarea>
+                      </div>
+                </div>
+            
+             </container-element>
+        </div>
+        <div class="card-footer">
+<button class="btn btn-info" onclick="alert('Maybe then, someday, somehow...')">
+    Fix answer
+</button>
+        </div>
+    </div>
+</div>
+<div class="col-6"></div>
+</div>
